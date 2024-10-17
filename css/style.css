@@ -1,0 +1,100 @@
+body {
+    font-family: "Raleway", "Montserrat", sans-serif;
+    overflow-x: hidden;
+}
+
+nav .navbar-brand {
+    font-family: "Raleway";
+}
+
+nav .nav-item a {
+    font-family: "Montserrat";
+}
+
+.row .col-lg-6 img {
+    -o-transition: 0.5s;
+    -webkit-transition: 0.1s;
+    -moz-transition: 0.1s;
+    -ms-transition: 0.1s;
+    transition: 0.1s;
+}
+
+.row .col-lg-6 img:hover {
+    -o-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.service-card {
+    transition: transform 0.3s;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.service-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.service-icon {
+    font-size: 50px;
+    color: #007bff;
+}
+
+.nav-link:hover {
+    border-bottom: 1px solid black;
+}
+
+#carouselExample {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.carousel-inner {
+    height: 100%;
+}
+
+.carousel-item {
+    height: 100%;
+}
+
+.carousel-item img {
+    height: 100%;
+    object-fit: cover;
+}
+
+.cart-container {
+    position: relative;
+}
+
+.cart-products {
+    position: absolute;
+    top: 55px;
+    left: -100px;
+    z-index: 1000;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.cart-container:hover .cart-products {
+    display: block;
+}
+
+.btn-center {
+    position: sticky;
+    bottom: 0;
+    background-color: white;
+    padding: 10px;
+    z-index: 10;
+}
