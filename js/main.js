@@ -10,7 +10,7 @@ let lastName = localStorage.getItem("LastName");
 
 function checkUserStatus() {
   if (firstName) {
-    userNameIn.textContent = `Welcome, ${firstName} ${lastName}` || "";
+    userNameIn.textContent = `Welcome, ${firstName.toLocaleUpperCase()} ${lastName.toLocaleUpperCase()}`; // Display user name
     signInButton.classList.add("d-none");
     logInButton.classList.add("d-none");
     logOutBtn.classList.remove("d-none");
@@ -37,10 +37,16 @@ logOutBtn.onclick = handleUserLogout;
 
 
 
+let deleteAllBtn = document.querySelector("#deleteAllBtn");
+function deleteAll() {
+  localStorage.removeItem("products");
+}
+
 deleteAllBtn.onclick = function () {
-  deleteAll();
   productsCart.innerHTML = "";
-  cartCount()
+  deleteAll();
+  cartCount();
+  cartRead()
 };
 
 let btnCenter = document.querySelector(".btn-center");
@@ -66,32 +72,36 @@ let productsCart = document.querySelector(".productsCart");
 function cartRead() {
   let localProducts = JSON.parse(localStorage.getItem("products")) || [];
   let cartHtml = "";
-
-  localProducts.forEach(function (product) {
-    cartHtml += `<div class='col-lg-4 col-md-3 col-12'>
-    <div class="card mx-auto my-1" style="width: 18rem;">
-        <div class="card-body" id="${product.id}">
+  if (localProducts.length === 0) {
+    productsCart.innerHTML = `<h4 class='text-danger'>Your cart is empty. Add products to continue.</h4>`;
+  } else {
+    localProducts.forEach(function (product) {
+      cartHtml += `
+      <div class='col-lg-4 col-md-3 col-12'>
+        <div class="card mx-auto my-1" style="width: 18rem;">
+          <div class="card-body" id="${product.id}">
             <h5 class="card-title">${product.title}</h5>
             <p class="card-text"><strong>Category: </strong>${product.category}</p>
             <p class="card-text"><strong>Available Stock:</strong> ${product.stock}</p>
             <p class="card-text"><strong>Price:</strong> $${product.price}</p>
             <div class="d-grid gap-2 d-md-block">
-                <button class="btn btn-primary" type="button">+</button>
-                <button class="btn btn-primary" type="button">-</button>
+              <button onclick="inc(${product.id})" class="btn btn-primary" type="button">+</button>
+              <button onclick="dec(${product.id})" class="btn btn-primary" type="button">-</button>
             </div>
             <div>
-                <p>Quantity</p>
-                <span>0</span>
+              <p>Quantity</p>
+              <span class='Quantity' id="quantity-${product.id}">0</span>
             </div>
             <button onclick="deleteProduct(${product.id})" class='btn btn-danger'>Delete Product</button>
+          </div>
         </div>
-    </div>
-</div>
-`;
-  });
+      </div>
+    `;
+    });
 
-  productsCart.innerHTML = cartHtml;
-  cartCount();
+    productsCart.innerHTML = cartHtml;
+    cartCount();
+  }
 }
 window.onload = function () {
   cartRead();
